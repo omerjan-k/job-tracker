@@ -5,3 +5,36 @@ _build
 */build-assets
 */build-chunks
 .rsdoctor
+.meteor/local/
+.meteor/dev_bundle/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Backups
+backups/
+*.backup
+
+# Logs
+logs/
+*.log
