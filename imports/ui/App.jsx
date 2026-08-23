@@ -1,12 +1,10 @@
-import React from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { useTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import "../ui/tailwind.css";
 
-// 1. Core Pages are now safely imported
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import Login from "./auth/Login";
+import Dashboard from "./jobs/Dashboard";
 
 export default function App() {
   // Combine user tracking and loggingIn status inside a single useTracker execution

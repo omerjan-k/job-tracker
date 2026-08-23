@@ -5,7 +5,9 @@
     "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer"
+    "visualize": "meteor --production --extra-packages bundle-visualizer",
+    "lint": "eslint imports client server --ext .js,.jsx",
+    "lint:fix": "eslint imports client server --ext .js,.jsx --fix"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
@@ -16,6 +18,7 @@
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@meteorjs/rspack": "^2.0.1",
     "@rsdoctor/rspack-plugin": "^1.5.7",
     "@rspack/cli": "^1.7.1",
@@ -24,6 +27,8 @@
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.3.3",
     "autoprefixer": "^10.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "meteor-node-stubs": "^1.2.29",
     "postcss": "^8.5.26",
     "postcss-load-config": "^6.0.1",
