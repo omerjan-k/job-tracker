@@ -35,7 +35,7 @@ Meteor.methods({
 
     check(jobId, String);
 
-    const job = JobsCollection.findOneAsync({ _id: jobId, userId: this.userId });
+    const job = await JobsCollection.findOneAsync({ _id: jobId, userId: this.userId });
     if (!job) {
       throw new Meteor.Error('not-found', 'Job not found or you do not have permission to edit it.');
     }
@@ -68,7 +68,7 @@ Meteor.methods({
 
     check(jobId, String);
 
-    const job = JobsCollection.findOneAsync({ _id: jobId, userId: this.userId });
+    const job = await JobsCollection.findOneAsync({ _id: jobId, userId: this.userId });
     if (!job) {
       throw new Meteor.Error('not-found', 'Job not found or you do not have permission to delete it.');
     }
