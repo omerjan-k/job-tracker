@@ -19,10 +19,10 @@ Accounts.emailTemplates.resetPassword = {
 };
 
 Meteor.startup(async () => {
-
-  // Set the MAIL_URL for sending emails
-  // eslint-disable-next-line no-undef
-  process.env.MAIL_URL = 'smtp://bskbcIr0RNlanCK:bskbcIr0RNlanCK@://brevo.com'
+  // MAIL_URL comes from settings.json (private.mailUrl), never hardcoded in source.
+  if (Meteor.settings.private?.mailUrl) {
+    process.env.MAIL_URL = Meteor.settings.private.mailUrl;
+  }
 
   console.log('Server started'); // eslint-disable-line no-console
 });

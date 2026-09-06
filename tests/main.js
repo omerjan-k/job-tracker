@@ -1,4 +1,5 @@
 import assert from "assert";
+import "../imports/api/jobs/jobs.tests.js";
 
 describe("job-tracker", function () {
   it("package.json has correct name", async function () {

@@ -42,4 +42,14 @@ export default [
   {
     ignores: [".meteor/**", "node_modules/**", "public/**", "private/**", "imports/ui/tailwind.css"],
   },
+  {
+    files: ["server/**/*.{js,jsx}", "**/server/**/*.{js,jsx}"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        Buffer: "readonly",
+        __dirname: "readonly",
+      },
+    },
+  },
 ];
