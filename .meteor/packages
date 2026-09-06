@@ -25,3 +25,4 @@ rspack@1.1.0                  # Integrate Rspack into Meteor for client and serv
 accounts-password
 fourseven:scss
 meteortesting:mocha
+email

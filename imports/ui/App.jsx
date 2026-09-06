@@ -4,6 +4,8 @@ import { Meteor } from "meteor/meteor";
 import "../ui/tailwind.css";
 
 import Login from "./auth/Login";
+import ForgotPassword from "./auth/ForgotPassword";
+import ResetPassword from "./auth/ResetPassword";
 import Dashboard from "./jobs/Dashboard";
 import { Layout } from "./ layout/Layout";
 
@@ -31,6 +33,8 @@ export default function App() {
     !user
       ? [
           { path: "/login", element: <Login /> },
+          { path: "/forgot-password", element: <ForgotPassword /> },
+          { path: "/reset-password/:token", element: <ResetPassword /> },
           { path: "*", element: <Navigate to="/login" replace /> },
         ]
       : [

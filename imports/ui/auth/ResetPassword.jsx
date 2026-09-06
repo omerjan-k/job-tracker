@@ -1,57 +1,47 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Meteor } from "meteor/meteor";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { Accounts } from "meteor/accounts-base";
 
-export default function Login() {
-  const [isSignup, setIsSignup] = useState(false);
-  const [email, setEmail] = useState("");
+export default function ResetPassword() {
+  const { token } = useParams();
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
 
-    if (isSignup) {
-      Accounts.createUser({ email, password }, (err) => {
-        if (err) setError(err.reason || "Signup failed");
-      });
-    } else {
-      Meteor.loginWithPassword(email, password, (err) => {
-        if (err) setError(err.reason || "Login failed");
-      });
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
     }
+
+    Accounts.resetPassword(token, password, (err) => {
+      if (err) {
+        setError(err.reason || "Could not reset password");
+      } else {
+        navigate("/", { replace: true });
+      }
+    });
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4">
       <div className="bg-white p-8 rounded-xl shadow-md max-w-sm w-full border border-slate-200">
         <h2 className="text-2xl font-bold text-center text-slate-800 mb-6">
-          {isSignup ? "Create Account" : "Sign In"}
+          Reset Password
         </h2>
 
-        {error && (
-          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
-        )}
-
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Password
+              New Password
             </label>
             <input
               type="password"
@@ -63,33 +53,32 @@ export default function Login() {
             />
           </div>
 
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition"
           >
-            {isSignup ? "Sign Up" : "Sign In"}
+            Reset Password
           </button>
         </form>
 
-        {!isSignup && (
-          <p className="text-sm text-center mt-4">
-            <Link to="/forgot-password" className="text-blue-600 hover:underline font-medium">
-              Forgot password?
-            </Link>
-          </p>
-        )}
-
         <p className="text-sm text-center text-slate-500 mt-4">
-          {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
-          <button
-            onClick={() => {
-              setIsSignup(!isSignup);
-              setError("");
-            }}
-            className="text-blue-600 hover:underline font-medium"
-          >
-            {isSignup ? "Sign In" : "Sign Up"}
-          </button>
+          <Link to="/login" className="text-blue-600 hover:underline font-medium">
+            Back to Sign In
+          </Link>
         </p>
       </div>
     </div>
