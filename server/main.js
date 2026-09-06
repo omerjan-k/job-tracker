@@ -22,7 +22,7 @@ Meteor.startup(async () => {
 
   // Set the MAIL_URL for sending emails
   // eslint-disable-next-line no-undef
-  process.env.MAIL_URL = 'smtp://b82587001%40smtp-brevo.com:bskbcIr0RNlanCK@://brevo.com'
+  process.env.MAIL_URL = 'smtp://bskbcIr0RNlanCK:bskbcIr0RNlanCK@://brevo.com'
 
   console.log('Server started'); // eslint-disable-line no-console
 });
