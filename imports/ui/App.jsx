@@ -5,9 +5,9 @@ import "../ui/tailwind.css";
 
 import Login from "./auth/Login";
 import Dashboard from "./jobs/Dashboard";
+import { Layout } from "./ layout/Layout";
 
 export default function App() {
-  // Combine user tracking and loggingIn status inside a single useTracker execution
   const { user, loggingIn } = useTracker(() => {
     Meteor.subscribe('meteor.loginServiceConfiguration');
     return {
@@ -16,7 +16,6 @@ export default function App() {
     };
   });
 
-  // Render a clean Tailwind-powered spinner while Meteor restores user sessions
   if (loggingIn) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -28,7 +27,6 @@ export default function App() {
     );
   }
 
-  // Create standard route trees matching React Router v7 recommendations
   const router = createBrowserRouter(
     !user
       ? [
@@ -36,7 +34,14 @@ export default function App() {
           { path: "*", element: <Navigate to="/login" replace /> },
         ]
       : [
-          { path: "/", element: <Dashboard /> },
+          {
+            path: "/",
+            element: <Layout />,
+            children: [
+              { index: true, element: <Dashboard /> },
+              { path: "dashboard", element: <Dashboard /> },
+            ],
+          },
           { path: "/login", element: <Navigate to="/" replace /> },
           { path: "*", element: <Navigate to="/" replace /> },
         ]

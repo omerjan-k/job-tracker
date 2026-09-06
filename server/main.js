@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import './publications';
 import 'imports/api/jobs/methods';
 import 'imports/api/jobs/server/publications';
 
