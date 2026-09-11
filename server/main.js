@@ -19,10 +19,9 @@ Accounts.emailTemplates.resetPassword = {
 };
 
 Meteor.startup(async () => {
-  // MAIL_URL comes from settings.json (private.mailUrl), never hardcoded in source.
-  if (Meteor.settings.private?.mailUrl) {
-    process.env.MAIL_URL = Meteor.settings.private.mailUrl;
-  }
+
+  Accounts.emailTemplates.from = 'Omer-Dev <omerjan.k@gmail.com>';
+  Accounts.emailTemplates.siteName = 'Job Tracker';
 
   console.log('Server started'); // eslint-disable-line no-console
 });
